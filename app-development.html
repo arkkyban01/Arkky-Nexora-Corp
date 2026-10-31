@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Apps | Arkky Nexus</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: #f8fafc;
+            color: #334155;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f172a, #1d4ed8);
+            color: white;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .hero h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            color: #cbd5e1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            color: #0f172a;
+            font-size: 2rem;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .app-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            box-shadow: 0 8px 20px #00000008;
+            transition: 0.3s;
+        }
+
+        .app-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 30px #00000012;
+        }
+
+        .app-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .app-card h3 {
+            color: #1e40af;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .app-card p {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 11px 24px;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .back {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Arkky Nexus</h1>
+    <p>Explore Our Applications</p>
+</header>
+
+<section class="hero">
+    <h2>Welcome to Our Apps</h2>
+
+    <p>
+        Discover useful digital tools and applications
+        developed by Arkky Nexus to make your everyday
+        activities easier and smarter.
+    </p>
+</section>
+
+<main class="container">
+
+    <div class="section-title">
+        <h2>Our Applications</h2>
+        <p>Select an application to get started.</p>
+    </div>
+
+    <div class="apps-grid">
+
+        <!-- App 1: Dictionary -->
+        <div class="app-card">
+
+            <div class="app-icon">📖</div>
+
+            <h3>My Dictionary</h3>
+
+            <p>
+                Search English words, discover their meanings,
+                definitions and improve your vocabulary.
+            </p>
+
+            <a href="dictionary.html" class="btn">
+                Open Dictionary →
+            </a>
+
+        </div>
+
+        <!-- App 2 -->
+        <div class="app-card">
+
+            <div class="app-icon">🚀</div>
+
+            <h3>Coming Soon</h3>
+
+            <p>
+                A new application is being prepared.
+                Stay connected for more useful digital tools.
+            </p>
+
+            <a href="#" class="btn"
+               onclick="alert('This application is coming soon!'); return false;">
+                Coming Soon
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="back">
+        <a href="index.html" class="btn">
+            ← Back to Home
+        </a>
+    </div>
+
+</main>
+
+<footer>
+    <p>© 2026 Arkky NexusCorp. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arkky — Elevate Your Business</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #0f172a;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            position: relative;
+        }
+
+        /* Top Left: Circular Logo Container */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-circle {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Middle: Arkky Branding */
+        .brand-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-title span {
+            color: var(--primary);
+        }
+
+        /* Top Right: 3-Line Menu Toggle */
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* Slide-Out Drawer Panel */
+        .slide-drawer {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: var(--white);
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            z-index: 1003;
+            display: flex;
+            flex-direction: column;
+            padding: 2.5rem 2rem;
+            transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-drawer.active {
+            right: 0;
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+
+        .drawer-header h3 {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            color: var(--accent);
+        }
+
+        .drawer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .drawer-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            display: block;
+            padding: 0.4rem 0;
+        }
+
+        .drawer-links a:hover, .drawer-links a.active {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        /* Overlay Background when menu is open */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--white);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid #475569;
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--white);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Features Section */
+        .features {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.03);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--accent);
+            color: #94a3b8;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Media adjustments for smaller screens */
+        @media (max-width: 576px) {
+            .brand-title {
+                font-size: 1.3rem;
+            }
+            .nav-container {
+                padding: 0.8rem 1rem;
+            }
+        }
+		
+/* App Development Introduction */
+.app-development {
+    max-width: 1100px;
+    margin: 5rem auto;
+    padding: 0 2rem;
+}
+
+.app-dev-content {
+    background: linear-gradient(135deg, #0f172a, #1e40af);
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.12);
+}
+
+.app-dev-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.app-dev-content h2 {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    margin-bottom: 1rem;
+}
+
+.app-dev-content p {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    color: #cbd5e1;
+    font-size: 1.05rem;
+}
+
+.btn-app {
+    display: inline-block;
+    background: #ffffff;
+    color: #2563eb;
+    padding: 0.85rem 1.6rem;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.btn-app:hover {
+    background: #dbeafe;
+    transform: translateY(-3px);
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <!-- Top Left: Circle Logo Space -->
+            <a href="index.html" class="logo-container">
+                <div class="logo-circle">AK</div>
+            </a>
+            
+            <!-- Middle: Brand Name Arkky -->
+            <a href="index.html" class="brand-title">Arkky <span>Nexus</span></a>
+
+            <!-- Top Right: 3-Line Hamburger Menu Toggle -->
+            <button class="menu-toggle" id="menu-btn" aria-label="Open Navigation Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Slide-Out Drawer Navigation Panel -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <nav class="slide-drawer" id="slide-drawer">
+        <div class="drawer-header">
+            <h3>Menu</h3>
+            <button class="close-btn" id="close-btn" aria-label="Close Navigation Menu">&times;</button>
+        </div>
+        <ul class="drawer-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="enquiry.html">Enquiry</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Build Your Future With Confidence</h1>
+            <p>We provide modern, scalable, and high-performance solutions designed to take your newly started business to the next level.</p>
+            <div class="hero-buttons">
+                <a href="services.html" class="btn-primary">Explore Services</a>
+                <a href="about.html" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+	
+<!-- App Development Introduction Section -->
+<section class="app-development">
+    <div class="app-dev-content">
+        <div class="app-dev-icon">💻</div>
+
+        <h2>App Development</h2>
+
+        <p>
+            Turn your ideas into powerful digital experiences.
+            At Arkky Nexus, we create modern, responsive,
+            user-friendly and scalable applications designed
+            to help individuals, startups and businesses grow.
+        </p>
+
+        <a href="app-development.html" class="btn-app">
+            Explore App Development →
+        </a>
+    </div>
+</section>
+
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-title">
+            <h2>Why Choose Us</h2>
+            <p>Built for startups, entrepreneurs, and forward-thinking enterprises.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🚀 Rapid Innovation</h3>
+                <p>Deploy cutting-edge strategies and optimized workflows tailored to maximize market entry speed and impact.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🛡️ Secure & Reliable</h3>
+                <p>Enterprise-grade security practices implemented from day one to protect your assets and client data.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📈 Scalable Growth</h3>
+                <p>Infrastructure and business frameworks designed to grow seamlessly as your customer base expands.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Arkky NexusCorp. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript to Control Slide Drawer Open/Close Actions -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const slideDrawer = document.getElementById('slide-drawer');
+        const drawerOverlay = document.getElementById('drawer-overlay');
+
+        function toggleMenu() {
+            slideDrawer.classList.toggle('active');
+            drawerOverlay.classList.toggle('active');
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        drawerOverlay.addEventListener('click', toggleMenu);
+    </script>
+</body>
+</html>
